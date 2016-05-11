@@ -7,13 +7,16 @@ class RecoTrailer {
     private var debitAmount: Long  = 0
     private var creditAmount: Long = 0
 
+    private val typeRange = IntRange(64, 65)
+    private val amountRange = IntRange(67, 74)
+
     fun updateAmounts(record: String) {
         if (isDebit(record)) {
             debitCount++
-            debitAmount += getAmount(record)
+            debitAmount += getInt(record, amountRange)
         } else {
             creditCount++
-            creditAmount -= getAmount(record)
+            creditAmount -= getInt(record, amountRange)
         }
     }
 
@@ -28,18 +31,13 @@ class RecoTrailer {
         creditAmount = 0
     }
 
-    private fun getTransactionType(record: String): Int {
-        val type = record.subSequence(64, 66).toString()
-        return Integer.parseInt(type)
-    }
-
-    private fun getAmount(record: String): Int {
-        val amount = record.subSequence(67, 75).toString()
-        return Integer.parseInt(amount)
+    private fun getInt(record: String, range: IntRange): Int {
+        val i = record.substring(range)
+        return Integer.parseInt(i)
     }
 
     private fun isDebit(record: String): Boolean {
-        return getTransactionType(record) == 10
+        return getInt(record, typeRange) == 10
     }
 
 }
