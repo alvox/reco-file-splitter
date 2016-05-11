@@ -7,12 +7,16 @@ object TrailerConverter {
                                        -10 to "}", -11 to "J", -12 to "K", -13 to "L", -14 to "M",
                                        -15 to "N", -16 to "O", -17 to "P", -18 to "Q", -19 to "R")
 
+    private val counterPad = 9
+    private val amountPad = 15
+    private val fillChar = '0'
+
     fun convert(debitCounter: Long, debitAmount: Long, creditCounter: Long, creditAmount: Long): String {
         val trailer =  "9" +
-                debitCounter.toString().padStart(9, '0') +
-                convert(debitAmount).padStart(15, '0') +
-                creditCounter.toString().padStart(9, '0') +
-                convert(creditAmount).padStart(15, '0')
+                debitCounter.toString().padStart(counterPad, fillChar) +
+                convert(debitAmount).padStart(amountPad, fillChar) +
+                creditCounter.toString().padStart(counterPad, fillChar) +
+                convert(creditAmount).padStart(amountPad, fillChar)
         return trailer.padEnd(165)
     }
 
