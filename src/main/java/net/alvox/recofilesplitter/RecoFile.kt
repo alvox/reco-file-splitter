@@ -10,7 +10,6 @@ class RecoFile (val originalFileName: String, val header: String) {
     private val trailer = RecoTrailer()
 
     private var fileCounter = 1;
-
     private var records: MutableList<String> = ArrayList()
 
     fun addRecord(record: String) {

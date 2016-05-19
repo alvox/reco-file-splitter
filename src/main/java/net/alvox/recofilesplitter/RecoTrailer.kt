@@ -59,10 +59,9 @@ class RecoTrailer {
             return trailer.padEnd(165)
         }
 
-        fun convert(value: Long?): String {
-            val v = value ?: 0
-            val vstr = Math.abs(v).toString();
-            val lastDigit = (10 + Character.getNumericValue(vstr.last())) * ssign(v)
+        fun convert(value: Long): String {
+            val vstr = Math.abs(value).toString();
+            val lastDigit = (10 + Character.getNumericValue(vstr.last())) * ssign(value)
             return vstr.dropLast(1) + charByDigit[lastDigit]
         }
 
