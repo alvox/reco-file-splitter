@@ -25,8 +25,8 @@ fun main(args: Array<String>) {
 fun split(fileName: String, numberOfRecords: Int) {
     val iterator = File(fileName).readLines(Charset.forName("UTF-8")).iterator()
     val header = iterator.next()
+    val file = RecoFile(fileName, header)
     var recordCounter = 0
-    var file = RecoFile(fileName, header)
 
     while (iterator.hasNext()) {
         if (recordCounter == numberOfRecords) {

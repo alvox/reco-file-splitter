@@ -31,7 +31,7 @@ class RecoFile (val originalFileName: String, val header: String) {
     }
 
     private fun getContent(): ByteArray {
-        var builder = StringBuilder(header).append(separator)
+        val builder = StringBuilder(header).append(separator)
         records.forEach {record -> builder.append(record).append(separator)}
         builder.append(trailer.compose()).append(separator)
         return builder.toString().toByteArray(Charset.forName("us-ascii"))
